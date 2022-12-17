@@ -10,63 +10,69 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <title>Custom Video Player</title>
   <!-- Fonts -->
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Abel&family=Ubuntu&display=swap'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Play&family=Inter&display=swap'>
   <!-- CSS -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css'>
   <link rel='stylesheet' href='css/index.css'>
 </head>
 <body>
-  <div class='container'>
+  <div class="container">
+    <!-- Dark mode -->
     <div class="dark--mode__container">
       <button class="light--mode" data-mode="light-mode" aria-describedby="light and dark mode toggle" role="button">
         <img src="./assets/icons/toggle-light-mode.svg" alt="light mode toggle">
       </button>
     </div>
-    <div class="player--container" data-player="player" role="main">
-      <div class="video--container" data-video-container="container">
-          <video class="video" src="./video/chosen.mp4" poster="./assets/images/poster.jpg"></video>
-      </div>
-      <section class="controls" role="controls" aria-describedby="controls container">
-        <div class="progress" data-progress="progress" role="progressbar">
-          <div class="progress--bar" data-progress-bar="progress--bar"></div>
-          <div class="progress__slider" data-progress-slider="progress-slider"></div>
-        </div>
-          <!-- controls -->
-        <div class="controllers" role="control player container">
-          <button class="prev btn btn--medium" data-prev="prev" title="Previous" aria-describedby="previous button">
-              <img src="./assets/icons/backward-btn.svg" aria-label="icon previous" role="icon" aria-describedby="icon previou sbutton" alt="backward button">
-          </button>
-          <button class="play btn btn--large" data-play="play" title="Play / Pause" aria-describedby="play button">
-              <img src="./assets/icons/play-btn.svg" aria-label="icon play" role="icon" aria-describedby="icon play button" alt="play button">
-          </button>
-          <button class="next btn btn--medium" data-next="next" title="Next" aria-describedby="next button">
-              <img src="./assets/icons/forward-btn.svg" aria-label="icon next" role="icon" aria-describedby="icon next button" alt="next button">
-          </button>
-        </div>
-        <!-- skip -->
-        <div class="skip--container" role="skip buttons">
-          <button class="backward btn btn--small" data-skip="-10" title="Backward" aria-describedby="backward button"><< -10</button>
-          <button class="foreward btn btn--small" data-skip="25" title="Forward" aria-describedby="foreward button">>> 25</button>
-        </div>
-        <!-- Volume -->
-        <div class="volume--container" role="volume and slider container">
-          <button class="mute--btn btn btn--medium" data-mute="mute" title="Mute Sound" aria-describedby="mute button">
-              <i class="fas fa-volume-up" aria-label="icon mute" role="icon" aria-describedby="icon mute"></i>
-          </button>
-          <input type="range" name="slider" class="slider" id="slide" data-slider="slider" value="5" aria-required="false" aria-autocomplete="false" aria-invalid="false" autocomplete="false">
-        </div>
-        <div class="timer--container" role="timer container">
-          <span class="timer" data-timer="timer" role="timer">0:00/0:00</span>
-        </div>
-      </section><!-- Controls -->
-    </div>
+    <!-- End dark mode -->
+    <header class="header">
+      <h1 class="heading">video player</h1>
+    </header>
     <figure class="figure--container">
-      <figcaption class="figcaption--container">
-        <p class="artist--title" data-title="title" aria-describedby="artist title"></p>
-        <p class="artist--name" data-artist="artist" aria-describedby="artist name"></p>
+      <div class="player--container" data-player="player" role="main">
+        <div class="video--container" data-video-container="container">
+          <video class="video" src="./video/chosen.mp4" poster="./assets/images/poster.jpg"></video>
+        </div>
+        <section class="controls" role="controls" aria-describedby="controls container">
+          <div class="progress" data-progress="progress" role="progressbar">
+            <div class="progress--bar" data-progress-bar="progress--bar"></div>
+            <div class="progress__slider" data-progress-slider="progress-slider"></div>
+          </div>
+          <!-- controls -->
+          <div class="controllers" role="control player container">
+            <button class="prev btn btn--medium" data-prev="prev" title="Previous" aria-describedby="previous button">
+                <img src="./assets/icons/backward-btn.svg" aria-label="icon previous" role="icon" aria-describedby="icon previou sbutton" alt="backward button">
+            </button>
+            <button class="play btn btn--large" data-play="play" title="Play / Pause" aria-describedby="play button">
+                <img src="./assets/icons/play-btn.svg" aria-label="icon play" role="icon" aria-describedby="icon play button" alt="play button">
+            </button>
+            <button class="next btn btn--medium" data-next="next" title="Next" aria-describedby="next button">
+                <img src="./assets/icons/forward-btn.svg" aria-label="icon next" role="icon" aria-describedby="icon next button" alt="next button">
+            </button>
+          </div>
+          <!-- skip -->
+          <div class="skip--container" role="skip buttons">
+            <button class="backward btn btn--small" data-skip="-10" title="Backward" aria-describedby="backward button"><< -10</button>
+            <button class="foreward btn btn--small" data-skip="25" title="Forward" aria-describedby="foreward button">>> 25</button>
+          </div>
+          <!-- Volume -->
+          <div class="volume--container" role="volume and slider container">
+            <button class="mute--btn btn btn--medium" data-mute="mute" title="Mute Sound" aria-describedby="mute button">
+                <i class="fas fa-volume-up" aria-label="icon mute" role="icon" aria-describedby="icon mute"></i>
+            </button>
+            <input type="range" name="slider" class="slider" id="slide" data-slider="slider" value="5" aria-required="false" aria-autocomplete="false" aria-invalid="false" autocomplete="false">
+          </div>
+          <div class="timer--container" role="timer container">
+            <span class="timer" data-timer="timer" role="timer">0:00/0:00</span>
+          </div>
+        </section><!-- Controls -->
+      </div><!-- Player container-->
+
+      <figcaption class="status--container">
+        <p class="status" data-status="status" aria-describedby="status"></p>
+        <p class="artist" data-artist="artist" aria-describedby="status"></p>
       </figcaption>
     </figure>
-  </div>
+  </div><!-- Container -->
   <script src='js/index.js'></script>
 </body>
 </html>
