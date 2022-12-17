@@ -1,0 +1,162 @@
+:root {
+  // Dark mode colors
+  --color-dark: #2c3e50;
+  --color-light: #ffffff;
+}
+
+// ========== VIEWPORT
+$width: 100vw;
+$height: 100vh;
+// ========== SIZES
+$size: 100%;
+$padding: 1.5rem;
+$radius: .5rem;
+// ========== FONTS
+$font-stack-1: 'Play', sans-serif;
+$font-stack-2: 'Inter', sans-serif;
+$fnt-wgt: .85;
+$fnt-sz: calc(($padding * $fnt-wgt) + 1vmin);
+// ========== COLORS
+// Secondary colors
+$color-blue: #3498db;
+$color-lt-gry: #ecf0f1;
+
+* {
+  &,
+  &::after,
+  &::before{
+    box-sizing: border-box;
+  }
+}
+
+html {
+  font-size: initial
+}
+
+html,
+body {
+  width: $size;
+  height: $height
+}
+
+img,
+video { width: $size; }
+
+h1,
+p {
+  font-size: initial;
+  overflow-wrap: break-word;
+}
+
+body,
+h1,
+p {
+  margin: 0;
+  padding: 0
+}
+
+/* remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration       : 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration      : 0.01ms !important;
+    scroll-behavior          : auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--color-dark);
+  background: $color-lt-gry;
+  font-family: $font-stack-1;
+  overflow: auto;
+}
+
+.container,
+.controllers,
+.volume--container,
+.skip--container,
+.timer--container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container { 
+  flex-direction: column; 
+  height: $size;
+  // dark mode
+  .dark--mode__container {
+    position: fixed;
+    top: 0;
+    right: $padding;
+    padding-block-start: .75rem;
+
+    .light--mode {
+      background-color: transparent;
+      border: 0;
+      border-radius: 0;
+
+      &:focus {
+        outline: none
+      }
+    }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $size;
+    padding-block-start: 2.75rem;
+    padding-block-end: 1rem;
+
+    .heading {
+      font-size: $fnt-sz;
+      text-transform: capitalize;
+    }
+  }
+
+  .figure--container {
+    display: flex;
+    height: $height;
+    margin: 0;
+
+    .player--container {
+      width: $size;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      overflow: hidden;
+
+      .video--container { height: auto; }
+      .controls {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        gap: .5rem;
+        align-content: center;
+        justify-items: center;
+        
+        height: 5rem;
+        padding-inline: .4rem;
+        position: relative;
+        top: -.22rem;
+        background-color: rgba(0,0,0,.75);
+
+        .progress {
+          width: $size;
+          height: .35rem;
+          position: absolute;
+          top: 0;
+          background-color: #677380;
+        }
+      }
+    }
+  }
+}

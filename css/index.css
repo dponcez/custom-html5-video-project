@@ -1,0 +1,137 @@
+:root {
+  --color-dark: #2c3e50;
+  --color-light: #ffffff;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: initial;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+img,
+video {
+  width: 100%;
+}
+
+h1,
+p {
+  font-size: initial;
+  overflow-wrap: break-word;
+}
+
+body,
+h1,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+  *,
+*::before,
+*::after {
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--color-dark);
+  background: #ecf0f1;
+  font-family: "Play", sans-serif;
+  overflow: auto;
+}
+
+.container,
+.controllers,
+.volume--container,
+.skip--container,
+.timer--container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  flex-direction: column;
+  height: 100%;
+}
+.container .dark--mode__container {
+  position: fixed;
+  top: 0;
+  right: 1.5rem;
+  -webkit-padding-before: 0.75rem;
+          padding-block-start: 0.75rem;
+}
+.container .dark--mode__container .light--mode {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.container .dark--mode__container .light--mode:focus {
+  outline: none;
+}
+.container .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  -webkit-padding-before: 2.75rem;
+          padding-block-start: 2.75rem;
+  -webkit-padding-after: 1rem;
+          padding-block-end: 1rem;
+}
+.container .header .heading {
+  font-size: calc(1.275rem + 1vmin);
+  text-transform: capitalize;
+}
+.container .figure--container {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+}
+.container .figure--container .player--container {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  overflow: hidden;
+}
+.container .figure--container .player--container .video--container {
+  height: auto;
+}
+.container .figure--container .player--container .controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 0.5rem;
+  align-content: center;
+  justify-items: center;
+  height: 5rem;
+  padding-inline: 0.4rem;
+  position: relative;
+  top: -0.22rem;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.container .figure--container .player--container .controls .progress {
+  width: 100%;
+  height: 0.35rem;
+  position: absolute;
+  top: 0;
+  background-color: #677380;
+}/*# sourceMappingURL=index.css.map */
