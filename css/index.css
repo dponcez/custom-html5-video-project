@@ -35,6 +35,19 @@ p {
   padding: 0;
 }
 
+button {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+button:active {
+  transform: scale(0.98);
+}
+
 /* remove animations for people who've turned them off */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -78,14 +91,6 @@ body {
   -webkit-padding-before: 0.75rem;
           padding-block-start: 0.75rem;
 }
-.container .dark--mode__container .light--mode {
-  background-color: transparent;
-  border: 0;
-  border-radius: 0;
-}
-.container .dark--mode__container .light--mode:focus {
-  outline: none;
-}
 .container .header {
   display: flex;
   align-items: center;
@@ -107,13 +112,18 @@ body {
 }
 .container .figure--container .player--container {
   width: 100%;
+  height: auto;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
   overflow: hidden;
 }
 .container .figure--container .player--container .video--container {
-  height: auto;
+  height: 100%;
+}
+.container .figure--container .player--container:hover .controls {
+  bottom: 0;
+  transition: bottom 0.5s ease-in;
 }
 .container .figure--container .player--container .controls {
   display: grid;
@@ -124,8 +134,9 @@ body {
   justify-items: center;
   height: 5rem;
   padding-inline: 0.4rem;
-  position: relative;
-  top: -0.22rem;
+  position: absolute;
+  bottom: -4.7rem;
+  transition: bottom 0.75s ease-out;
   background-color: rgba(0, 0, 0, 0.75);
 }
 .container .figure--container .player--container .controls .progress {
@@ -134,4 +145,81 @@ body {
   position: absolute;
   top: 0;
   background-color: #677380;
+}
+.container .figure--container .player--container .controls .controllers,
+.container .figure--container .player--container .controls .skip--container,
+.container .figure--container .player--container .controls .volume--container,
+.container .figure--container .player--container .controls .timer--container {
+  grid-row: 2;
+}
+.container .figure--container .player--container .controls .volume--container {
+  grid-column: 1;
+  width: 5rem;
+}
+.container .figure--container .player--container .controls .volume--container .mute--btn {
+  color: var(--color-light);
+  font-size: 1.0125rem;
+}
+.container .figure--container .player--container .controls .volume--container .slider {
+  width: 2rem;
+  height: 0.35rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 1.5rem;
+  transition: width 0.3s;
+  cursor: pointer;
+}
+.container .figure--container .player--container .controls .volume--container .slider:focus {
+  outline: none;
+}
+.container .figure--container .player--container .controls .volume--container .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 100%;
+  background-color: #3498db;
+  border: 0.1vh solid rgba(52, 152, 219, 0.7);
+}
+.container .figure--container .player--container .controls .volume--container .slider:hover::-webkit-slider-thumb {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 100%;
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25), 0 0 0 0.3rem rgba(52, 152, 219, 0.15);
+}
+.container .figure--container .player--container .controls .controllers {
+  grid-column: 2;
+  width: 12rem;
+}
+.container .figure--container .player--container .controls .controllers .player--controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+}
+.container .figure--container .player--container .controls .controllers .player--controls .btn--large,
+.container .figure--container .player--container .controls .controllers .player--controls .btn--medium {
+  color: var(--color-light);
+}
+.container .figure--container .player--container .controls .controllers .player--controls .btn--medium {
+  font-size: 1.25rem;
+}
+.container .figure--container .player--container .controls .controllers .player--controls .btn--large {
+  font-size: 3rem;
+}
+.container .figure--container .player--container .controls .skip--container {
+  display: none;
+  grid-column: 3;
+  width: 8rem;
+}
+.container .figure--container .player--container .controls .timer--container {
+  grid-column: 3/4;
+  width: 5rem;
+  margin-left: -1rem;
+}
+.container .figure--container .player--container .controls .timer--container span {
+  color: var(--color-light);
+  font-size: 0.85rem;
+  letter-spacing: 0.1rem;
 }/*# sourceMappingURL=index.css.map */

@@ -55,6 +55,16 @@ p {
   padding: 0
 }
 
+button {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+
+  &:focus { outline: none; }
+  &:active { transform: scale(.98); }
+}
+
 /* remove animations for people who've turned them off */
 @media (prefers-reduced-motion: reduce) {
 
@@ -96,16 +106,6 @@ body {
     top: 0;
     right: $padding;
     padding-block-start: .75rem;
-
-    .light--mode {
-      background-color: transparent;
-      border: 0;
-      border-radius: 0;
-
-      &:focus {
-        outline: none
-      }
-    }
   }
 
   .header {
@@ -129,12 +129,19 @@ body {
 
     .player--container {
       width: $size;
+      height: auto;
       position: absolute;
       left: 50%;
       transform: translate(-50%);
       overflow: hidden;
+      
+      .video--container { height: $size; }
 
-      .video--container { height: auto; }
+      &:hover .controls {
+        bottom: 0;
+        transition: bottom .5s ease-in
+      }
+
       .controls {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -145,8 +152,9 @@ body {
         
         height: 5rem;
         padding-inline: .4rem;
-        position: relative;
-        top: -.22rem;
+        position: absolute;
+        bottom: -4.7rem;
+        transition: bottom .75s ease-out;
         background-color: rgba(0,0,0,.75);
 
         .progress {
@@ -155,6 +163,83 @@ body {
           position: absolute;
           top: 0;
           background-color: #677380;
+        }
+        
+        .controllers,
+        .skip--container,
+        .volume--container,
+        .timer--container { grid-row: 2; }
+
+        .volume--container {
+          grid-column: 1;
+          width: 5rem;
+
+          .mute--btn { 
+            color: var(--color-light);
+            font-size: 1.0125rem;
+          }
+
+          .slider {
+            width: 2rem;
+            height: .35rem;
+            appearance: none;
+            border-radius: $padding;
+            transition: width .3s;
+            cursor: pointer;
+
+            &:focus { outline: none; }
+
+            &::-webkit-slider-thumb {
+              appearance: none;
+              width: 1.45rem;
+              height: 1.45rem;
+              border-radius: $size;
+              background-color: $color-blue;
+              border: .1vh solid rgba($color-blue, .7)
+            }
+
+            &:hover::-webkit-slider-thumb {
+              width: 1.5rem;
+              height: 1.5rem;
+              border-radius: $size;
+              box-shadow: 0 0 0 .2rem rgba($color-blue, .25), 0 0 0 .3rem rgba($color-blue, .15);
+            }
+          }
+        }
+
+        .controllers {
+          grid-column: 2;
+          width: 12rem;
+
+          .player--controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: $size * .7;
+
+            .btn--large,
+            .btn--medium { color: var(--color-light); }
+            .btn--medium { font-size: 1.25rem; }
+            .btn--large { font-size: 3rem; }
+          }
+        }
+
+        .skip--container {
+          display: none;
+          grid-column: 3;
+          width: 8rem
+        }
+
+        .timer--container {
+          grid-column: 3 / 4;
+          width: 5rem;
+          margin-left: -1rem;
+
+          & span { 
+            color: var(--color-light);
+            font-size: .85rem;
+            letter-spacing: .1rem;
+          }
         }
       }
     }
