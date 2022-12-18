@@ -47,4 +47,37 @@ We initialize this repo updating our html file with the following snippet code.
     </body>
 ```
 
-You can find the full *HTML* code in the following repo [dponcez github](https://github.com/dponcez/custom-html5-video-project.git)
+Working with styles to mobile phone
+
+We use *SASS* or *SCSS* like a preprossesor to work more effecently with *CSS*.
+
+The *HTML*, *SCSS* and *JS* code, you can find them on my github account.
+
+**Snippet code.**
+
+```scss
+  .figure--container {
+    display: flex;
+    height: $height;
+    margin: 0;
+
+    .player--container {
+      width: $size;
+      height: auto;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      overflow: hidden;
+      
+      .video--container { height: $size; }
+
+      &:hover .controls {
+        bottom: 0;
+        transition: bottom .5s ease-in
+      }
+    }
+  }
+```
+
+
+Follow my github account [dponcez github](https://github.com/dponcez/custom-html5-video-project.git) to see the full code
