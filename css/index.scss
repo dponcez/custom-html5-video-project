@@ -1,25 +1,4 @@
-:root {
-  // Dark mode colors
-  --color-dark: #2c3e50;
-  --color-light: #ffffff;
-}
-
-// ========== VIEWPORT
-$width: 100vw;
-$height: 100vh;
-// ========== SIZES
-$size: 100%;
-$padding: 1.5rem;
-$radius: .5rem;
-// ========== FONTS
-$font-stack-1: 'Play', sans-serif;
-$font-stack-2: 'Inter', sans-serif;
-$fnt-wgt: .85;
-$fnt-sz: calc(($padding * $fnt-wgt) + 1vmin);
-// ========== COLORS
-// Secondary colors
-$color-blue: #3498db;
-$color-lt-gry: #ecf0f1;
+@import '_variables';
 
 * {
   &,
@@ -97,48 +76,40 @@ body {
   justify-content: center;
 }
 
-.container { 
-  flex-direction: column; 
+.container {
+  flex-direction: column;
   height: $size;
-  // dark mode
+  position: relative;
+
   .dark--mode__container {
     position: fixed;
-    top: 0;
-    right: $padding;
-    padding-block-start: .75rem;
+    top: 1rem;
+    right: .75rem;
   }
 
   .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: $size;
-    padding-block-start: 2.75rem;
-    padding-block-end: 1rem;
+    padding-block-end: 2rem;
 
-    .heading {
-      font-size: $fnt-sz;
-      text-transform: capitalize;
+    .heading { font-size: 1.5rem; }
+
+    @media screen and (min-width: 1024px) {
+      & {
+        .heading { font-size: 2.5rem; }
+      }
     }
   }
 
   .figure--container {
-    display: flex;
-    height: $height;
+    max-width: 45rem;
+    padding-inline: 1rem;
     margin: 0;
 
-    .player--container {
-      width: $size;
-      height: auto;
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%);
+    .hidden {
+      position: relative;
       overflow: hidden;
-      
-      .video--container { height: $size; }
 
       &:hover .controls {
-        bottom: 0;
+        bottom: .25rem;
         transition: bottom .5s ease-in
       }
 
@@ -149,13 +120,13 @@ body {
         gap: .5rem;
         align-content: center;
         justify-items: center;
-        
-        height: 5rem;
-        padding-inline: .4rem;
+
+        width: $size;
+        height: 4rem;
         position: absolute;
-        bottom: -4.7rem;
-        transition: bottom .75s ease-out;
+        bottom: -3.7rem;
         background-color: rgba(0,0,0,.75);
+        transition: bottom .5s ease-out;
 
         .progress {
           width: $size;
@@ -164,7 +135,7 @@ body {
           top: 0;
           background-color: #677380;
         }
-        
+
         .controllers,
         .skip--container,
         .volume--container,
@@ -241,6 +212,192 @@ body {
             letter-spacing: .1rem;
           }
         }
+
+        @media screen and (min-width: 425px) {
+          & {
+            grid-template-columns: repeat(3, 1fr);
+
+            .volume--container {
+              grid-column: 1;
+              width: $size;
+
+              .slider {
+                width: 5rem; 
+              }
+            }
+            .controllers {
+              grid-column: 2 / 3;
+            }
+
+            .timer--container {
+              grid-column: 4;
+            }
+          }
+        }
+
+        @media screen and (min-width: 768px) {
+          & {
+            width: $size;
+
+            .volume--container,
+            .skip--container,
+            .controllers,
+            .timer--container { width: $size; }
+
+            .volume--container {
+              .slider { width: 7rem; }
+              .mute--btn { font-size: 1.125rem; }
+            }
+
+            .controllers {
+              .player--controls { 
+                width: inherit;
+
+                .btn--medium { font-size: 1.25rem; }
+              }
+            }
+
+            .skip--container {
+              display: flex;
+              width: $size;
+
+              .btn--small { 
+                color: var(--color-light);
+                font-size: .85rem; 
+              }
+            }
+
+            .timer--container {
+              grid-column: 4;
+
+              & span { font-size: 1rem; }
+            }
+          }
+        }
+
+        @media screen and (min-width: 1024px) {
+          & {
+            width: $size;
+
+            .volume--container,
+            .skip--container,
+            .controllers,
+            .timer--container {
+              width: $size;
+            }
+
+            .volume--container {
+              .slider {
+                width: 8rem;
+              }
+
+              .mute--btn {
+                font-size: 1.25rem;
+              }
+            }
+
+            .controllers {
+              .player--controls {
+                width: inherit;
+
+                .btn--medium {
+                  font-size: 1.125rem;
+                }
+              }
+            }
+
+            .skip--container {
+              display: flex;
+              width  : $size * .5;
+
+              .btn--small {
+                color    : var(--color-light);
+                font-size: 1rem;
+              }
+            }
+
+            .timer--container {
+              grid-column: 4;
+              width: $size;
+              padding-inline-end: 1rem;
+
+              & span {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+
+        @media screen and (min-width: 1024px) {
+          & {
+            height: 5rem;
+            bottom: -4.67rem;
+
+            .controllers {
+              .player--controls {
+                width: inherit;
+
+                .btn--medium {
+                  font-size: 1.35rem;
+                }
+              }
+            }
+
+            .skip--container {
+              display: flex;
+              width: $size * .5;
+
+              .btn--small {
+                color: var(--color-light);
+                font-size: 1.0125rem;
+              }
+            }
+
+            .timer--container {
+              grid-column: 4;
+              width: $size;
+              padding-inline-end: 1rem;
+
+              & span {
+                font-size: 1.25rem;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .status--container {
+      width: $size;
+      height: 4rem;
+
+      .status,
+      .artist {
+        padding-inline-start: .35rem;
+        text-transform: capitalize;
+        font-family: $font-stack-2, sans-serif;
+      }
+
+      .status {
+        font-size: 2rem;
+        font-weight: 800;
+      }
+
+      .artist {
+        font-size: 1.25rem;
+      }
+
+      @media screen and (min-width: 1024px) {
+        & {
+          .status { font-size: 3rem; }
+          .artist { font-size: 1.5rem; }
+        }
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      & {
+        max-width: 50rem;
       }
     }
   }

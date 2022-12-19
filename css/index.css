@@ -83,84 +83,74 @@ body {
 .container {
   flex-direction: column;
   height: 100%;
+  position: relative;
 }
 .container .dark--mode__container {
   position: fixed;
-  top: 0;
-  right: 1.5rem;
-  -webkit-padding-before: 0.75rem;
-          padding-block-start: 0.75rem;
+  top: 1rem;
+  right: 0.75rem;
 }
 .container .header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  -webkit-padding-before: 2.75rem;
-          padding-block-start: 2.75rem;
-  -webkit-padding-after: 1rem;
-          padding-block-end: 1rem;
+  -webkit-padding-after: 2rem;
+          padding-block-end: 2rem;
 }
 .container .header .heading {
-  font-size: calc(1.275rem + 1vmin);
-  text-transform: capitalize;
+  font-size: 1.5rem;
+}
+@media screen and (min-width: 1024px) {
+  .container .header .heading {
+    font-size: 2.5rem;
+  }
 }
 .container .figure--container {
-  display: flex;
-  height: 100vh;
+  max-width: 45rem;
+  padding-inline: 1rem;
   margin: 0;
 }
-.container .figure--container .player--container {
-  width: 100%;
-  height: auto;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
+.container .figure--container .hidden {
+  position: relative;
   overflow: hidden;
 }
-.container .figure--container .player--container .video--container {
-  height: 100%;
-}
-.container .figure--container .player--container:hover .controls {
-  bottom: 0;
+.container .figure--container .hidden:hover .controls {
+  bottom: 0.25rem;
   transition: bottom 0.5s ease-in;
 }
-.container .figure--container .player--container .controls {
+.container .figure--container .hidden .controls {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   gap: 0.5rem;
   align-content: center;
   justify-items: center;
-  height: 5rem;
-  padding-inline: 0.4rem;
+  width: 100%;
+  height: 4rem;
   position: absolute;
-  bottom: -4.7rem;
-  transition: bottom 0.75s ease-out;
+  bottom: -3.7rem;
   background-color: rgba(0, 0, 0, 0.75);
+  transition: bottom 0.5s ease-out;
 }
-.container .figure--container .player--container .controls .progress {
+.container .figure--container .hidden .controls .progress {
   width: 100%;
   height: 0.35rem;
   position: absolute;
   top: 0;
   background-color: #677380;
 }
-.container .figure--container .player--container .controls .controllers,
-.container .figure--container .player--container .controls .skip--container,
-.container .figure--container .player--container .controls .volume--container,
-.container .figure--container .player--container .controls .timer--container {
+.container .figure--container .hidden .controls .controllers,
+.container .figure--container .hidden .controls .skip--container,
+.container .figure--container .hidden .controls .volume--container,
+.container .figure--container .hidden .controls .timer--container {
   grid-row: 2;
 }
-.container .figure--container .player--container .controls .volume--container {
+.container .figure--container .hidden .controls .volume--container {
   grid-column: 1;
   width: 5rem;
 }
-.container .figure--container .player--container .controls .volume--container .mute--btn {
+.container .figure--container .hidden .controls .volume--container .mute--btn {
   color: var(--color-light);
   font-size: 1.0125rem;
 }
-.container .figure--container .player--container .controls .volume--container .slider {
+.container .figure--container .hidden .controls .volume--container .slider {
   width: 2rem;
   height: 0.35rem;
   -webkit-appearance: none;
@@ -170,10 +160,10 @@ body {
   transition: width 0.3s;
   cursor: pointer;
 }
-.container .figure--container .player--container .controls .volume--container .slider:focus {
+.container .figure--container .hidden .controls .volume--container .slider:focus {
   outline: none;
 }
-.container .figure--container .player--container .controls .volume--container .slider::-webkit-slider-thumb {
+.container .figure--container .hidden .controls .volume--container .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
           appearance: none;
   width: 1.45rem;
@@ -182,44 +172,199 @@ body {
   background-color: #3498db;
   border: 0.1vh solid rgba(52, 152, 219, 0.7);
 }
-.container .figure--container .player--container .controls .volume--container .slider:hover::-webkit-slider-thumb {
+.container .figure--container .hidden .controls .volume--container .slider:hover::-webkit-slider-thumb {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 100%;
   box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25), 0 0 0 0.3rem rgba(52, 152, 219, 0.15);
 }
-.container .figure--container .player--container .controls .controllers {
+.container .figure--container .hidden .controls .controllers {
   grid-column: 2;
   width: 12rem;
 }
-.container .figure--container .player--container .controls .controllers .player--controls {
+.container .figure--container .hidden .controls .controllers .player--controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 70%;
 }
-.container .figure--container .player--container .controls .controllers .player--controls .btn--large,
-.container .figure--container .player--container .controls .controllers .player--controls .btn--medium {
+.container .figure--container .hidden .controls .controllers .player--controls .btn--large,
+.container .figure--container .hidden .controls .controllers .player--controls .btn--medium {
   color: var(--color-light);
 }
-.container .figure--container .player--container .controls .controllers .player--controls .btn--medium {
+.container .figure--container .hidden .controls .controllers .player--controls .btn--medium {
   font-size: 1.25rem;
 }
-.container .figure--container .player--container .controls .controllers .player--controls .btn--large {
+.container .figure--container .hidden .controls .controllers .player--controls .btn--large {
   font-size: 3rem;
 }
-.container .figure--container .player--container .controls .skip--container {
+.container .figure--container .hidden .controls .skip--container {
   display: none;
   grid-column: 3;
   width: 8rem;
 }
-.container .figure--container .player--container .controls .timer--container {
+.container .figure--container .hidden .controls .timer--container {
   grid-column: 3/4;
   width: 5rem;
   margin-left: -1rem;
 }
-.container .figure--container .player--container .controls .timer--container span {
+.container .figure--container .hidden .controls .timer--container span {
   color: var(--color-light);
   font-size: 0.85rem;
   letter-spacing: 0.1rem;
+}
+@media screen and (min-width: 425px) {
+  .container .figure--container .hidden .controls {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .container .figure--container .hidden .controls .volume--container {
+    grid-column: 1;
+    width: 100%;
+  }
+  .container .figure--container .hidden .controls .volume--container .slider {
+    width: 5rem;
+  }
+  .container .figure--container .hidden .controls .controllers {
+    grid-column: 2/3;
+  }
+  .container .figure--container .hidden .controls .timer--container {
+    grid-column: 4;
+  }
+}
+@media screen and (min-width: 768px) {
+  .container .figure--container .hidden .controls {
+    width: 100%;
+  }
+  .container .figure--container .hidden .controls .volume--container,
+.container .figure--container .hidden .controls .skip--container,
+.container .figure--container .hidden .controls .controllers,
+.container .figure--container .hidden .controls .timer--container {
+    width: 100%;
+  }
+  .container .figure--container .hidden .controls .volume--container .slider {
+    width: 7rem;
+  }
+  .container .figure--container .hidden .controls .volume--container .mute--btn {
+    font-size: 1.125rem;
+  }
+  .container .figure--container .hidden .controls .controllers .player--controls {
+    width: inherit;
+  }
+  .container .figure--container .hidden .controls .controllers .player--controls .btn--medium {
+    font-size: 1.25rem;
+  }
+  .container .figure--container .hidden .controls .skip--container {
+    display: flex;
+    width: 100%;
+  }
+  .container .figure--container .hidden .controls .skip--container .btn--small {
+    color: var(--color-light);
+    font-size: 0.85rem;
+  }
+  .container .figure--container .hidden .controls .timer--container {
+    grid-column: 4;
+  }
+  .container .figure--container .hidden .controls .timer--container span {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container .figure--container .hidden .controls {
+    width: 100%;
+  }
+  .container .figure--container .hidden .controls .volume--container,
+.container .figure--container .hidden .controls .skip--container,
+.container .figure--container .hidden .controls .controllers,
+.container .figure--container .hidden .controls .timer--container {
+    width: 100%;
+  }
+  .container .figure--container .hidden .controls .volume--container .slider {
+    width: 8rem;
+  }
+  .container .figure--container .hidden .controls .volume--container .mute--btn {
+    font-size: 1.25rem;
+  }
+  .container .figure--container .hidden .controls .controllers .player--controls {
+    width: inherit;
+  }
+  .container .figure--container .hidden .controls .controllers .player--controls .btn--medium {
+    font-size: 1.125rem;
+  }
+  .container .figure--container .hidden .controls .skip--container {
+    display: flex;
+    width: 50%;
+  }
+  .container .figure--container .hidden .controls .skip--container .btn--small {
+    color: var(--color-light);
+    font-size: 1rem;
+  }
+  .container .figure--container .hidden .controls .timer--container {
+    grid-column: 4;
+    width: 100%;
+    -webkit-padding-end: 1rem;
+            padding-inline-end: 1rem;
+  }
+  .container .figure--container .hidden .controls .timer--container span {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container .figure--container .hidden .controls {
+    height: 5rem;
+    bottom: -4.67rem;
+  }
+  .container .figure--container .hidden .controls .controllers .player--controls {
+    width: inherit;
+  }
+  .container .figure--container .hidden .controls .controllers .player--controls .btn--medium {
+    font-size: 1.35rem;
+  }
+  .container .figure--container .hidden .controls .skip--container {
+    display: flex;
+    width: 50%;
+  }
+  .container .figure--container .hidden .controls .skip--container .btn--small {
+    color: var(--color-light);
+    font-size: 1.0125rem;
+  }
+  .container .figure--container .hidden .controls .timer--container {
+    grid-column: 4;
+    width: 100%;
+    -webkit-padding-end: 1rem;
+            padding-inline-end: 1rem;
+  }
+  .container .figure--container .hidden .controls .timer--container span {
+    font-size: 1.25rem;
+  }
+}
+.container .figure--container .status--container {
+  width: 100%;
+  height: 4rem;
+}
+.container .figure--container .status--container .status,
+.container .figure--container .status--container .artist {
+  -webkit-padding-start: 0.35rem;
+          padding-inline-start: 0.35rem;
+  text-transform: capitalize;
+  font-family: "Inter", sans-serif, sans-serif;
+}
+.container .figure--container .status--container .status {
+  font-size: 2rem;
+  font-weight: 800;
+}
+.container .figure--container .status--container .artist {
+  font-size: 1.25rem;
+}
+@media screen and (min-width: 1024px) {
+  .container .figure--container .status--container .status {
+    font-size: 3rem;
+  }
+  .container .figure--container .status--container .artist {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container .figure--container {
+    max-width: 50rem;
+  }
 }/*# sourceMappingURL=index.css.map */
