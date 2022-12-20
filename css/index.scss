@@ -122,7 +122,7 @@ body {
         justify-items: center;
 
         width: $size;
-        height: 4rem;
+        height: 2rem;
         position: absolute;
         bottom: -3.7rem;
         background-color: rgba(0,0,0,.75);
@@ -147,7 +147,7 @@ body {
 
           .mute--btn { 
             color: var(--color-light);
-            font-size: 1.0125rem;
+            font-size: .75rem;
           }
 
           .slider {
@@ -162,16 +162,16 @@ body {
 
             &::-webkit-slider-thumb {
               appearance: none;
-              width: 1.45rem;
-              height: 1.45rem;
+              width: 1.1245rem;
+              height: 1.1245rem;
               border-radius: $size;
               background-color: $color-blue;
               border: .1vh solid rgba($color-blue, .7)
             }
 
             &:hover::-webkit-slider-thumb {
-              width: 1.5rem;
-              height: 1.5rem;
+              width: 1.125rem;
+              height: 1.125rem;
               border-radius: $size;
               box-shadow: 0 0 0 .2rem rgba($color-blue, .25), 0 0 0 .3rem rgba($color-blue, .15);
             }
@@ -180,18 +180,18 @@ body {
 
         .controllers {
           grid-column: 2;
-          width: 12rem;
+          width: 7rem;
 
           .player--controls {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: $size * .7;
+            width: $size * .8;
 
             .btn--large,
             .btn--medium { color: var(--color-light); }
-            .btn--medium { font-size: 1.25rem; }
-            .btn--large { font-size: 3rem; }
+            .btn--medium { font-size: .75rem; }
+            .btn--large { font-size: 1.2rem; }
           }
         }
 
@@ -203,16 +203,46 @@ body {
 
         .timer--container {
           grid-column: 3 / 4;
-          width: 5rem;
-          margin-left: -1rem;
+          width: $size;
+          margin-left: 0;
 
           & span { 
             color: var(--color-light);
-            font-size: .85rem;
+            font-size: .75rem;
             letter-spacing: .1rem;
           }
         }
 
+        @media screen and (min-width: 375px) {
+          & {
+            grid-template-columns: repeat(3, 1fr);
+            height: 3rem;
+
+            .volume--container {
+              grid-column: 1;
+              width: $size;
+              margin-inline-start: 1rem;
+
+              .slider { width: 2rem; }
+            }
+
+            .controllers {
+              grid-column: 2 / 3;
+              width: 10rem;
+
+              .player--controls { 
+                width: $size * .8;
+
+                .btn--large { font-size: 1.5rem;}
+              }
+            }
+
+            .timer--container {
+              grid-column: 4;
+              margin-inline-end: 1rem;
+            }
+          }
+        }
         @media screen and (min-width: 425px) {
           & {
             grid-template-columns: repeat(3, 1fr);
@@ -220,17 +250,15 @@ body {
             .volume--container {
               grid-column: 1;
               width: $size;
+              margin-inline-start: 1rem;
 
-              .slider {
-                width: 5rem; 
-              }
+              .slider { width: 5rem; }
             }
-            .controllers {
-              grid-column: 2 / 3;
-            }
+            .controllers { grid-column: 2 / 3; }
 
             .timer--container {
               grid-column: 4;
+              margin-inline-end: 1rem;
             }
           }
         }
@@ -269,61 +297,9 @@ body {
 
             .timer--container {
               grid-column: 4;
+              margin-inline-end: 1rem;
 
               & span { font-size: 1rem; }
-            }
-          }
-        }
-
-        @media screen and (min-width: 1024px) {
-          & {
-            width: $size;
-
-            .volume--container,
-            .skip--container,
-            .controllers,
-            .timer--container {
-              width: $size;
-            }
-
-            .volume--container {
-              .slider {
-                width: 8rem;
-              }
-
-              .mute--btn {
-                font-size: 1.25rem;
-              }
-            }
-
-            .controllers {
-              .player--controls {
-                width: inherit;
-
-                .btn--medium {
-                  font-size: 1.125rem;
-                }
-              }
-            }
-
-            .skip--container {
-              display: flex;
-              width  : $size * .5;
-
-              .btn--small {
-                color    : var(--color-light);
-                font-size: 1rem;
-              }
-            }
-
-            .timer--container {
-              grid-column: 4;
-              width: $size;
-              padding-inline-end: 1rem;
-
-              & span {
-                font-size: 1rem;
-              }
             }
           }
         }
@@ -333,19 +309,22 @@ body {
             height: 5rem;
             bottom: -4.67rem;
 
+            .volume--container {
+              .slider { width: 6rem; }
+            }
+
             .controllers {
               .player--controls {
                 width: inherit;
 
-                .btn--medium {
-                  font-size: 1.35rem;
-                }
+                .btn--large { font-size: 2.75rem; }
+                .btn--medium { font-size: 1.35rem; }
               }
             }
 
             .skip--container {
               display: flex;
-              width: $size * .5;
+              width: $size;
 
               .btn--small {
                 color: var(--color-light);
@@ -358,9 +337,7 @@ body {
               width: $size;
               padding-inline-end: 1rem;
 
-              & span {
-                font-size: 1.25rem;
-              }
+              & span { font-size: 1.0125rem; }
             }
           }
         }
@@ -383,9 +360,7 @@ body {
         font-weight: 800;
       }
 
-      .artist {
-        font-size: 1.25rem;
-      }
+      .artist { font-size: 1.25rem; }
 
       @media screen and (min-width: 1024px) {
         & {
