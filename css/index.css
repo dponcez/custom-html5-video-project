@@ -1,5 +1,5 @@
 :root {
-  --color-dark: #2c3e50;
+  --color-dark: #0D1117;
   --color-light: #ffffff;
 }
 
@@ -65,16 +65,21 @@ body {
   margin: 0;
   padding: 0;
   color: var(--color-dark);
-  background: #ecf0f1;
+  background-color: var(--color-light);
   font-family: "Play", sans-serif;
   overflow: auto;
+}
+body.active {
+  background-color: var(--color-dark);
+  color: var(--color-light);
 }
 
 .container,
 .controllers,
 .volume--container,
 .skip--container,
-.timer--container {
+.timer--container,
+.light--mode {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,12 +95,22 @@ body {
   top: 1rem;
   right: 0.75rem;
 }
+.container .dark--mode__container .light--mode {
+  width: 3rem;
+  height: 1.4375rem;
+  transform: scale(1);
+}
+.container .dark--mode__container .dark--mode {
+  transform: scale(1);
+  transition: transform 0.3s;
+}
 .container .header {
   -webkit-padding-after: 2rem;
           padding-block-end: 2rem;
 }
 .container .header .heading {
   font-size: 1.5rem;
+  text-transform: capitalize;
 }
 @media screen and (min-width: 1024px) {
   .container .header .heading {
