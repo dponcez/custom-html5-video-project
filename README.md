@@ -117,7 +117,130 @@ More information about **DARK MODE**, visit the following sites:
 - [prefers color scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
 - [A complete guide to dark mode on the web](https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/)
 
+*Custom video player*
+```js
+  function initApp(){
+    const playButton = document.querySelector('[data-play]');
+    const nextButton = document.querySelector('[data-next]');
+    const prevButton = document.querySelector('[data-prev]');
+  }
+```
 
+First, we create three variables, which will allow us to interact with our video player.
+
+We use these variables, called *playButton*, *nextButton* and *prevButton* with the listener method, which allows us to create a function or simply trigger a call directly, the first function is called **playCurrentVideo()** in which we compare whether the previously created **playVideo()** or **pauseVideo()** function are active or not, depending on the variable *isPlaying*, this variable has a false value, when we use an if-else statement, we will know if this variable is false o true, depending on what the condition evaluates, any of the functions already created, will be called.
+
+1. Call *playCurrentVideo()* function.
+
+```js
+  let isPlaying = false;
+
+  playButton.addEventListener('click', playCurrentVideo);
+
+  function playCurrentVideo(){
+    // code goes here
+  }
+```
+
+2. Create new functions.
+
+```js
+  function playVideo(){
+    const iconPause = '<i class="fas fa-pause"></i>';
+    playButton.innerHTML = iconPause;
+    video.volume = 0.5;
+
+    loadVideo(playlist[index]);
+    video.play()
+  }
+
+  function pauseVideo(){
+    const iconPlay = '<i class="fas fa-play"></i>';
+    playButton.innerHTML = iconPlay;
+
+    video.pause()
+  }
+```
+
+3. Use the if-else statement
+
+```js
+  function playCurrentVideo(){
+    if(!isPlaying){
+      playVideo();
+      isPlaying = true
+    }else {
+      pauseVideo();
+      isPlaying = false
+    }
+  }
+```
+
+As you saw in point 2, we have a new function called **loadVideo()**, this function allows us to load our video that are hosted in the video folder :file_folder:, in addition to having the video information in a :page_facing_up: file in *json* format, which we use to be called by the *fetch()* method, as follows.
+
+```js
+  const fetchData =  async () => {
+    const requestURL = './json/index.json';
+    const response = await fetch(requestURL);
+    playlist = await response.json();
+
+    loadVideo(playlist[index]);
+  }
+
+  fetchData();
+
+  function loadVideo(source){
+    const { song, name, title, poster } = source;
+
+    try {
+      video.loop = false;
+      video.src = `${dir}/${song}.${ext}`;
+      video.poster = `${poster}`;
+      info.innerHTML = 'Your browser does not support video element';
+
+      status.innerHTML = `${title}`;
+      artistName.innerHTML = `${name}`;
+
+      TITLE.textContent = `${title} - ${name}`;
+
+      video.appendChild(info);
+      video_container.appendChild(video);
+
+    } catch(error){
+      console.log(`Bad request: ${error}`);
+    }
+  }
+```
+
+4. Following steps
+
+The following step is create the **playNextVideo()** and **playPreviousVideo()** functions, like so.
+
+```js
+  function playNextVideo(){
+    index++;
+    if(index > playlist.length - 1){
+      index = 0;
+    }
+
+    video.currentTime = 0;
+    progressBar.style.width = 0;
+    progressSlider.style.width = 0;
+
+    loadVideo(playlist[index]);
+    playVideo()
+  }
+
+  function playPreviousVideo(){
+    index--;
+    if(index < 0){
+      index = playlist.length - 1;
+    }
+
+    loadVideo(playlist[index]);
+    playVideo()
+  }
+```
 
 ~~Follow my github account [dponcez github](https://github.com/dponcez/custom-html5-video-project.git) to see the full code~~
 
