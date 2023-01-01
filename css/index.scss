@@ -8,9 +8,7 @@
   }
 }
 
-html {
-  font-size: initial;
-}
+html { font-size: initial; }
 
 html,
 body {
@@ -36,17 +34,16 @@ p {
 
 button {
   background-color: transparent;
+  color: var(--color-light);
   border: 0;
   border-radius: 0;
   cursor: pointer;
-
   &:focus { outline: none; }
   &:active { transform: scale(.98); }
 }
 
 /* remove animations for people who've turned them off */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -105,7 +102,6 @@ body {
 
   .header {
     padding-block-end: 2rem;
-
     .heading { 
       font-size: 1.5rem; 
       text-transform: capitalize;
@@ -119,14 +115,15 @@ body {
   }
 
   .figure--container {
-    max-width: 45rem;
+    width: 45rem;
+    height: 31.345rem;
+    max-width: 100%;
     padding-inline: 1rem;
     margin: 0;
 
     .hidden {
       position: relative;
       overflow: hidden;
-
       &:hover .controls {
         bottom: .25rem;
         transition: bottom .5s ease-in
@@ -134,16 +131,15 @@ body {
 
       .controls {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         grid-template-rows: auto;
-        gap: .5rem;
+        gap: .5rem 0;
         align-content: center;
         justify-items: center;
-
         width: $size;
         height: 2rem;
         position: absolute;
-        bottom: -3.7rem;
+        bottom: -1.7rem;
         background-color: rgba(0,0,0,.75);
         transition: bottom .5s ease-out;
 
@@ -153,22 +149,38 @@ body {
           position: absolute;
           top: 0;
           background-color: #677380;
+          &:hover { cursor: e-resize; }
+          &--bar,
+          &__slider {
+            width: 0;
+            position: absolute;
+            top: 0;
+            left: 0
+          }
+          &--bar {
+            height: $size;
+            background-color: $color-blue;
+            transition: width 650ms cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: 2;
+          }
+          &__slider {
+            height: inherit;
+            background-color: rgba($color-lt-gry, .7);
+            transition: width 850ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1
+          }
         }
 
         .controllers,
         .skip--container,
         .volume--container,
-        .timer--container { grid-row: 2; }
+        .timer--container,
+        .expand--container { grid-row: 2; }
 
         .volume--container {
           grid-column: 1;
-          width: 5rem;
-
-          .mute--btn { 
-            color: var(--color-light);
-            font-size: .75rem;
-          }
-
+          width: 4rem;
+          .mute--btn { font-size: .75rem; }
           .slider {
             width: 2rem;
             height: .35rem;
@@ -178,7 +190,6 @@ body {
             cursor: pointer;
 
             &:focus { outline: none; }
-
             &::-webkit-slider-thumb {
               appearance: none;
               width: 1.1245rem;
@@ -187,7 +198,6 @@ body {
               background-color: $color-blue;
               border: .1vh solid rgba($color-blue, .7)
             }
-
             &:hover::-webkit-slider-thumb {
               width: 1.125rem;
               height: 1.125rem;
@@ -198,17 +208,13 @@ body {
         }
 
         .controllers {
-          grid-column: 2;
+          grid-column: 2 / 4;
           width: 7rem;
-
           .player--controls {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: $size * .8;
-
-            .btn--large,
-            .btn--medium { color: var(--color-light); }
             .btn--medium { font-size: .75rem; }
             .btn--large { font-size: 1.2rem; }
           }
@@ -221,37 +227,40 @@ body {
         }
 
         .timer--container {
-          grid-column: 3 / 4;
+          grid-column: 4 / 5;
           width: $size;
           margin-left: 0;
-
           & span { 
             color: var(--color-light);
-            font-size: .75rem;
+            font-size: .6rem;
             letter-spacing: .1rem;
           }
+        }
+
+        .expand--container {
+          grid-column: 5;
+          display: flex;
+          .expand--btn { font-size: 1rem; }
         }
 
         @media screen and (min-width: 375px) {
           & {
             grid-template-columns: repeat(3, 1fr);
             height: 3rem;
+            bottom: -2.7rem;
 
             .volume--container {
               grid-column: 1;
               width: $size;
-              margin-inline-start: 1rem;
-
+              margin-inline-start: 0;
               .slider { width: 2rem; }
             }
 
             .controllers {
-              grid-column: 2 / 3;
-              width: 10rem;
-
+              grid-column: 2 / 4;
+              width: 8rem;
               .player--controls { 
                 width: $size * .8;
-
                 .btn--large { font-size: 1.5rem;}
               }
             }
@@ -260,20 +269,19 @@ body {
               grid-column: 4;
               margin-inline-end: 1rem;
             }
+
+            .expand--container { grid-column: 5; }
           }
         }
         @media screen and (min-width: 425px) {
           & {
-            grid-template-columns: repeat(3, 1fr);
-
+            grid-template-columns: repeat(4, 1fr);
             .volume--container {
               grid-column: 1;
               width: $size;
-              margin-inline-start: 1rem;
-
+              margin-inline-start: 0;
               .slider { width: 5rem; }
             }
-            .controllers { grid-column: 2 / 3; }
 
             .timer--container {
               grid-column: 4;
@@ -285,39 +293,36 @@ body {
         @media screen and (min-width: 768px) {
           & {
             width: $size;
-
             .volume--container,
             .skip--container,
             .controllers,
             .timer--container { width: $size; }
 
             .volume--container {
+              grid-column: 1;
               .slider { width: 7rem; }
               .mute--btn { font-size: 1.125rem; }
             }
 
             .controllers {
+              grid-column: 2;
               .player--controls { 
                 width: inherit;
-
+                .btn--large { font-size: 2rem; }
                 .btn--medium { font-size: 1.25rem; }
               }
             }
 
             .skip--container {
+              grid-column: 3;
               display: flex;
               width: $size;
-
-              .btn--small { 
-                color: var(--color-light);
-                font-size: .85rem; 
-              }
+              .btn--small { font-size: .85rem; }
             }
 
             .timer--container {
               grid-column: 4;
               margin-inline-end: 1rem;
-
               & span { font-size: 1rem; }
             }
           }
@@ -327,7 +332,6 @@ body {
           & {
             height: 5rem;
             bottom: -4.67rem;
-
             .volume--container {
               .slider { width: 6rem; }
             }
@@ -335,7 +339,6 @@ body {
             .controllers {
               .player--controls {
                 width: inherit;
-
                 .btn--large { font-size: 2.75rem; }
                 .btn--medium { font-size: 1.35rem; }
               }
@@ -344,20 +347,17 @@ body {
             .skip--container {
               display: flex;
               width: $size;
-
-              .btn--small {
-                color: var(--color-light);
-                font-size: 1.0125rem;
-              }
+              .btn--small { font-size: 1.0125rem; }
             }
 
             .timer--container {
               grid-column: 4;
               width: $size;
               padding-inline-end: 1rem;
-
               & span { font-size: 1.0125rem; }
             }
+
+            .expand--container { margin-inline: 1rem; }
           }
         }
       }
@@ -366,7 +366,6 @@ body {
     .status--container {
       width: $size;
       height: 4rem;
-
       .status,
       .artist {
         padding-inline-start: .35rem;
@@ -390,9 +389,7 @@ body {
     }
 
     @media screen and (min-width: 1024px) {
-      & {
-        max-width: 50rem;
-      }
+      & { width: 50rem; }
     }
   }
 }
