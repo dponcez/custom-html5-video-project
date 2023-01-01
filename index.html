@@ -33,8 +33,8 @@
     <figure class="figure--container">
       <div class="player--container">
         <div class="hidden" data-player="player" role="main">
-          <div class="video--container" data-video-container="container">
-            <video class="video" src="./video/chosen.mp4" poster="./assets/images/poster.jpg"></video>
+          <div class="video--container" id="container">
+            <video class="video" src="./video/Chosen.mp4" poster="./assets/images/poster.jpg" data-source="video"></video>
           </div>
           <section class="controls" role="controls" aria-describedby="controls container">
             <div class="progress" data-progress="progress" role="progressbar">
@@ -71,10 +71,19 @@
               <button class="mute--btn btn btn--medium" data-mute="mute" title="Mute Sound" aria-describedby="mute button">
                   <i class="fas fa-volume-up" aria-label="icon mute" role="icon" aria-describedby="icon mute"></i>
               </button>
-              <input type="range" name="slider" class="slider" id="slide" data-slider="slider" value="5" aria-required="false" aria-autocomplete="false" aria-invalid="false" autocomplete="false">
+              <input type="range" name="slider" class="slider" id="slide" 
+                data-slider="slider" min="0" max="100" value="5" step="1"
+                aria-required="false" aria-autocomplete="false" 
+                aria-invalid="false" autocomplete="false" role="slider">
             </div>
             <div class="timer--container" role="timer container">
               <span class="timer" data-timer="timer" role="timer">0:00/0:00</span>
+            </div>
+            <!-- Expand screen -->
+            <div class="expand--container">
+              <button class="expand--btn" data-expand="expand" title="Open Screen / Close Screen" aria-describedby="expand button" role="switch">
+                <i class="fa-solid fa-up-right-and-down-left-from-center" aria-label="icon expand" role="icon" aria-describedby="icon expand screen"></i>
+              </button>
             </div>
           </section><!-- Controls -->
         </div><!-- Hidden -->
