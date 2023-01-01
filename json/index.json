@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Blxst ft. Tyga & Ty Dolla $ign",
+    "song": "Chosen",
+    "title": "Chosen",
+    "poster": "./assets/images/poster.jpg",
+    "musical_genre": {
+      "name": "hip hop"
+    }
+  },
+  {
+    "name": "Chris Brown",
+    "song": "Treading-Water",
+    "title": "Treading Water",
+    "poster": "./assets/images/poster2.jpg",
+    "musical_genre": {
+      "name": "pop"
+    }
+  },
+  {
+    "name": "BTS",
+    "song": "Butter",
+    "title": "Butter",
+    "poster": "./assets/images/poster1.jpg",
+    "musical_genre": {
+      "name": "kpop"
+    }
+  }
+]
