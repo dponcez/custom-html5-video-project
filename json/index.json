@@ -1,29 +1,25 @@
-[
-  {
-    "name": "Blxst ft. Tyga & Ty Dolla $ign",
-    "song": "Chosen",
-    "title": "Chosen",
-    "poster": "./assets/images/poster.jpg",
-    "musical_genre": {
-      "name": "hip hop"
+{
+  "playlist": [
+    {
+      "name": "blxst ft. tyga & ty dolla $ign",
+      "song": "chosen",
+      "title": "chosen",
+      "poster": "./assets/images/poster.jpg",
+      "album": "no love lost"
+    },
+    {
+      "name": "chris brown",
+      "song": "treading-water",
+      "title": "treading water",
+      "poster": "./assets/images/poster2.jpg",
+      "album": "fortune"
+    },
+    {
+      "name": "BTS",
+      "song": "butter",
+      "title": "butter",
+      "poster": "./assets/images/poster1.jpg",
+      "album": "single"
     }
-  },
-  {
-    "name": "Chris Brown",
-    "song": "Treading-Water",
-    "title": "Treading Water",
-    "poster": "./assets/images/poster2.jpg",
-    "musical_genre": {
-      "name": "pop"
-    }
-  },
-  {
-    "name": "BTS",
-    "song": "Butter",
-    "title": "Butter",
-    "poster": "./assets/images/poster1.jpg",
-    "musical_genre": {
-      "name": "kpop"
-    }
-  }
-]
+  ]
+}
