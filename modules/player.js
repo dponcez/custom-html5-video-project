@@ -33,7 +33,7 @@ export const player = () => {
     songName,
     artistName,
     albumName,
-    progressBara,
+    progressBar,
     progress,
     durationText,
     currentText
@@ -41,14 +41,19 @@ export const player = () => {
 
   const icons = {
     fa_play: '<i class="fa-solid fa-play"></i>',
-    fa_pause: '<i class="fa-solid fa-pause"></i>'
+    fa_pause: '<i class="fa-solid fa-pause"></i>',
+    fa_volume_mute: '<i class="fa-solid fa-volume-xmark"></i>',
+    fa_volume_high: '<i class="fa-solid fa-volume-high"></i>'
   }
 
-  const { fa_play, fa_pause } = icons;
+  const { fa_play, fa_pause, fa_volume_mute, fa_volume_high } = icons;
 
   let playlist;
   let current_index = 0;
   let timeout = 300;
+  let playing = false;
+  let isMute = false;
+  let mousedown = false;
 
   const fetchData = async (URL) => {
     try {
@@ -74,13 +79,15 @@ export const player = () => {
     const source = data.playlist[index];
     const { name, song, title, album, poster } = source;
     let ext = 'mp4';
-    let sourcePath = `../assets/video/${song}.${ext}`;
+
+    if(userAgent.indexOf('chrome') !== -1 || userAgent.indexOf('edge') !== -1) ext = 'webm';
+    if(userAgent.indexOf('opera') !== -1 || userAgent.indexOf('safari') !== -1) ext = 'ogg';
+
+    const SOURCE_PATH = `../assets/video/${song}.${ext}`;
     
     try {
-      if(userAgent.indexOf('chrome') !== -1 || userAgent.indexOf('edge') !== -1) ext = 'webm';
-      if(userAgent.indexOf('opera') !== -1 || userAgent.indexOf('safari') !== -1) ext = 'ogg';
-
-      video.src = sourcePath;
+      video.src = SOURCE_PATH;
+      video.poster = poster;
       artistName.innerText = name;
       songName.innerText = title;
       albumName.innerText = album;
@@ -91,15 +98,89 @@ export const player = () => {
     }
   }
 
+  const playVideo = () => {
+    playBtn.innerHTML = fa_pause;
+    video.play();
+  }
+
+  const pauseVideo = () => {
+    playBtn.innerHTML = fa_play;
+    video.pause()
+  }
+
   const handlePlayVideo = () => {
-    if(video.paused){
-      playBtn.innerHTML = fa_pause;
-      video.play();
+    if(video.paused && !playing){
+      playing = true;
+      playVideo();
     }else{
-      playBtn.innerHTML = fa_play;
-      video.pause()
+      playing = false;
+      pauseVideo();
     }
   }
+
+  const handlePrevVideo = () => {
+    current_index--;
+
+    try {
+      const PLAYLIST_LENGTH = playlist.playlist.length - 1;
+      if(current_index < 0) current_index = PLAYLIST_LENGTH;
+
+      video.currentTime = 0;
+      progress.style.width = 0;
+
+      loadCurrentVideo(playlist, current_index);
+      playVideo();
+    } catch (error) {
+      log(`Failure to load the previous song: ${error.message}`)
+    }
+  }
+
+  const handleNextVideo = () => {
+    current_index++;
+
+    try {
+      const PLAYLIST_LENGTH = playlist.playlist.length - 1;
+      if(current_index > PLAYLIST_LENGTH) current_index = 0;
+
+      video.currentTime = 0;
+      progress.style.width = 0;
+
+      loadCurrentVideo(playlist, current_index);
+      playVideo();
+    } catch (error) {
+      log(`Failure to load the next song: ${error.message}`)
+    }
+  }
+
+  const handleMuteVideo = () => {
+    const MUTED = video.muted ? video.muted = false : video.muted = true;
+    if(!MUTED && !isMute){
+      isMute = true;
+      muteBtn.innerHTML = fa_volume_high;
+      slider.value = 50;
+    }else{
+      isMute = false;
+      muteBtn.innerHTML = fa_volume_mute;
+      slider.value = 0;
+    }
+  }
+
+  const handleVolumeSlider = () => {
+    video.volume = slider.value / 100;
+
+    (slider.value === '0') ?
+      muteBtn.innerHTML = fa_volume_mute :
+      muteBtn.innerHTML = fa_volume_high
+  }
+
+  // rewind of fast forward the current video
+  skipBtn.forEach(button => {
+    eventHandler(button, 'click', () => {
+      const SUFFIX = button.dataset.skip;
+      if(SUFFIX === '-10') video.currentTime -= 10;
+      if(SUFFIX === '+25') video.currentTime += 25
+    })
+  })
 
   const seekTimeUpdate = (e) => {
     const { duration, currentTime } = e.srcElement;
@@ -112,11 +193,30 @@ export const player = () => {
     durationText.innerText = `0${formatTime(Number(durTime))}`;
     currentText.innerText = `0${formatTime(Number(curTime))}`;
   }
+  
+  const updateProgressBar = (e) => {
+    const WIDTH = progressBar.offsetWidth;
+    const OFFSET_X = e.offsetX;
+    const DURATION = video.duration;
 
-  const loadVideoSource = () => spinner.style.display = 'none'
+    video.currentTime = (OFFSET_X / WIDTH) * DURATION;
+  }
 
-  eventHandler(video, 'canplaythrough', loadVideoSource);
+  const loadMultimediaElement = () => spinner.style.display = 'none'
+
+  eventHandler(video, 'canplaythrough', debounce(() => loadMultimediaElement(), timeout));
   eventHandler(video, 'timeupdate', seekTimeUpdate);
   eventHandler(video, 'loadedmetadata', seekTimeUpdate);
+  eventHandler(video, 'ended', debounce(() => handleNextVideo(), timeout));
+
   eventHandler(playBtn, 'click', debounce(() => handlePlayVideo(), timeout));
+  eventHandler(prevBtn, 'click', debounce(() => handlePrevVideo(), timeout));
+  eventHandler(nextBtn, 'click', debounce(() => handleNextVideo(), timeout));
+  eventHandler(muteBtn, 'click', debounce(() => handleMuteVideo(), timeout));
+  eventHandler(slider, 'change', debounce(() => handleVolumeSlider(),timeout));
+
+  eventHandler(progressBar, 'click', updateProgressBar);
+  eventHandler(progressBar, 'mousemove', debounce((e) => mousedown && updateProgressBar(e), timeout));
+  eventHandler(progressBar, 'mousedown', debounce(() => mousedown = true), timeout);
+  eventHandler(progressBar, 'mouseup', debounce(() => mousedown = false), timeout);
 }
