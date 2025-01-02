@@ -30,12 +30,11 @@
   justify-content: center
 }
 
-:where(.video-player, .toggle, .control--container, .feature--container) { position: relative; }
+:where(.video--player, .toggle, .control--container, .feature--container) { position: relative; }
 :where(.progress--bar, .icon, .spinner--container) { position: absolute; }
 
 video { 
   width: var(--sz);
-  min-width: 48rem;
   aspect-ratio: 16/9;
 }
 
@@ -151,7 +150,9 @@ button {
 }
 
 .video--player {
+  width: 48rem;
   min-height: calc(var(--vh) * .74);
+  margin: 0;
   z-index: 2;
   .feature--container {
     align-items: flex-start;
