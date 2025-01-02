@@ -16,7 +16,7 @@ export const template = () => {
     <figure class="video--player">
       <div class="hidden">
         <div class="video--container">
-          <video data-source poster="../assets/images/poster.jpg"></video>
+          <video data-source></video>
         </div>
         <div class="control--container flex" id="controlContainer" aria-describedby="controlContainer" role="complementary">
           <div class="progress--bar" id="progressBar" aria-describedby="progressBar" role="progressbar" data-progress-bar>
@@ -33,13 +33,13 @@ export const template = () => {
               <i class="fa fa-solid fa-backward"></i>
             </button>
             <div class="player--container flex">
-              <button class="chevron--left btn flex" id="chevron-left" aria-describedby="chevronLeft" role="button" data-backward>
+              <button class="chevron--left btn flex" id="chevron-left" aria-describedby="chevronLeft" role="button" data-prev>
                 <i class="fa-solid fa-chevron-left"></i>
               </button>
               <button class="play--btn btn flex" id="playButton" aria-describedby="playButton" role="button" data-play>
                 <i class="fa-solid fa-play"></i>
               </button>
-              <button class="chevron--right btn flex" id="chevron-right" aria-describedby="chevronRight" role="button" data-forward>
+              <button class="chevron--right btn flex" id="chevron-right" aria-describedby="chevronRight" role="button" data-next>
                 <i class="fa-solid fa-chevron-right"></i>
               </button>
             </div>
