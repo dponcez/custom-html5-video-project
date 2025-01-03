@@ -4,4 +4,4 @@ import { handleDarkMode } from "../hooks/theme.js";
 
 template();
 player();
-// handleDarkMode('dark', 'active', ['[data-dark-mode]', '.main', '.mode'])
+handleDarkMode('dark', 'active', ['[data-dark-mode]', '.main', '.mode', '.inactive'])
