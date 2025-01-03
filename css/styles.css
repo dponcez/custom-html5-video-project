@@ -10,9 +10,7 @@
   --black-color: #1f1f20;
   --white-color: #f7f8f9;
   --gray-color: #9da0a5;
-  --light-blue-color: #2e8ce2;
   --dark-red-color: #6F1A15;
-  --dark-gray-color: #41474e;
   --dark-blue-color: #1f313c;
   --light-mode: linear-gradient(135deg, #c5d4e2 0%, #d9dde0 60%, #f3f5f7 100%);
   --dark-mode: linear-gradient(135deg, #274f77 0%, #1b364b 60%, #0b3865 100%);
@@ -29,9 +27,11 @@
   align-items: center;
   justify-content: center
 }
-
 :where(.video--player, .toggle, .control--container, .feature--container) { position: relative; }
 :where(.progress--bar, .icon, .spinner--container) { position: absolute; }
+:where(.inactive) {
+  &.active { color: var(--white-color) }
+}
 
 video { 
   width: var(--sz);
@@ -66,6 +66,7 @@ button {
   place-items: center;
   height: 100dvh;
   background: var(--light-mode);
+  &.dark {  background: var(--dark-mode) }
   .header {
     justify-content: space-between;
     width: var(--sz);
@@ -78,6 +79,14 @@ button {
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      &.inactive {
+        &.active {
+          background: var(--light-mode);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+      }
       & span {
         display: inline-block;
         font-family: var(--fnt-abel);
@@ -93,12 +102,12 @@ button {
         width: var(--sz);
         min-width: 3.35rem;
         height: calc(var(--pd) * 1.125);
-        background: var(--dark-red-color);
-        box-shadow: .125vmin .125vmin .125rem rgba(0, 0, 0, .5) inset, .125vmin -.125vmin .25rem rgba(102, 12, 5, 0.5) inset;
+        background: var(--dark-blue-color);
+        box-shadow: .125vmin .125vmin .125rem rgba(0, 0, 0, .5) inset, .125vmin -.125vmin .25rem rgba(1236, 234, 234, 0.25) inset;
         border-radius: 15rem;
         &.active { 
-          background: var(--dark-blue-color);
-          box-shadow: .125vmin .125vmin .125rem rgba(0, 0, 0, .5) inset, .125vmin -.125vmin .125rem rgba(236, 234, 234, 0.25) inset;
+          background: var(--white-color);
+          box-shadow: .125vmin .125vmin .125rem rgba(0, 0, 0, .5) inset, .125vmin -.125vmin .125rem rgba(102, 12, 5, 0.5) inset;
         }
         &::before {
           content: "";
@@ -107,13 +116,13 @@ button {
           position: absolute;
           background: var(--white-color);
           border-radius: var(--sz);
-          top: .05rem;
+          top: .075rem;
           right: .15rem;
           transition: 200ms right cubic-bezier(0.075, 0.82, 0.165, 1);
         }
         &.active::before {
-          background: var(--light-blue-color);
-          top: .05rem;
+          background: var(--dark-blue-color);
+          top: .075rem;
           left: .1rem;
           transition: 200ms left cubic-bezier(0.165, 0.84, 0.44, 1)
         }
