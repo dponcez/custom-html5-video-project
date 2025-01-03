@@ -8,7 +8,7 @@ export const template = () => {
       <div class="spinner"></div>
     </div>
     <header class="header flex">
-      <h2 class="logo">video<span>player</span></h2>
+      <h2 class="logo inactive">video<span>player</span></h2>
       <div class="toggle--container flex">
         <button class="toggle inactive" id="dark-mode" aria-describedby="darkMode" role="button" data-dark-mode></button>
       </div>
@@ -23,9 +23,9 @@ export const template = () => {
             <div class="progress" id="progress" aria-describedby="progress" role="progressbar" data-progress></div>
           </div>
           <div class="flex">
-            <span class="current--time timer inactive" aria-current="time" role="timer" data-current-time>00:00</span>
+            <span class="current--time timer" aria-current="time" role="timer" data-current-time>00:00</span>
             <span>/</span>
-            <span class="duration timer inactive" aria-current="time" role="timer" data-duration>00:00</span>
+            <span class="duration timer" aria-current="time" role="timer" data-duration>00:00</span>
           </div>
           <div class="controls flex" aria-describedby="controls" role="complementary">
             <button class="rewind--btn btn flex" id="rewind" aria-describedby="rewind" role="button" data-skip="-10">
@@ -62,11 +62,11 @@ export const template = () => {
         </div>
       </div>
       <figcaption class="feature--container flex">
-        <p class="song--name" role="dialog" aria-describedby="status" data-song></p>
+        <p class="song--name inactive" role="dialog" aria-describedby="status" data-song></p>
         <div class="flex">
-          <p class="artist--name" role="dialog" data-artist></p>
+          <p class="artist--name inactive" role="dialog" data-artist></p>
           <span class="dash"></span> 
-          <p class="album--name" role="dialog" data-album></p>
+          <p class="album--name inactive" role="dialog" data-album></p>
         </div>
       </figcaption>
     </figure>
