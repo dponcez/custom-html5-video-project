@@ -18,7 +18,8 @@ export const player = () => {
     progressBar: selector('[data-progress-bar]'),
     progress: selector('[data-progress]'),
     durationText: selector('[data-duration]'),
-    currentText: selector('[data-current-time]')
+    currentText: selector('[data-current-time]'),
+    fullScreenBtn: selector('[data-expand]')
   }
 
   const {
@@ -36,7 +37,8 @@ export const player = () => {
     progressBar,
     progress,
     durationText,
-    currentText
+    currentText,
+    fullScreenBtn
   } = htmlRefs;
 
   const icons = {
@@ -77,7 +79,7 @@ export const player = () => {
 
   const loadCurrentVideo = (data, index) => {
     const source = data.playlist[index];
-    const { name, song, title, album, poster } = source;
+    const { name, song, title, album } = source;
     let ext = 'mp4';
 
     if(userAgent.indexOf('chrome') !== -1 || userAgent.indexOf('edge') !== -1) ext = 'webm';
@@ -87,7 +89,6 @@ export const player = () => {
     
     try {
       video.src = SOURCE_PATH;
-      video.poster = poster;
       artistName.innerText = name;
       songName.innerText = title;
       albumName.innerText = album;
@@ -128,6 +129,10 @@ export const player = () => {
       video.currentTime = 0;
       progress.style.width = 0;
 
+      playlist ?
+        spinner.style.display = 'flex' :
+        loadMultimediaElement();
+
       loadCurrentVideo(playlist, current_index);
       playVideo();
     } catch (error) {
@@ -144,6 +149,10 @@ export const player = () => {
 
       video.currentTime = 0;
       progress.style.width = 0;
+
+      playlist ?
+        spinner.style.display = 'flex' :
+        loadMultimediaElement();
 
       loadCurrentVideo(playlist, current_index);
       playVideo();
@@ -182,6 +191,18 @@ export const player = () => {
     })
   })
 
+  const handleFullScreen = () => {
+    if(!document.mozFullScreen || !document.webkitFullScreen){
+      video.requestFullScreen() ?
+        video.mozRequestFullScreen() :
+        video.webkitRequestFullScreen(Element.ALLOW_KEYBOAR_INPUT)
+    }else{
+      document.cancelFullScreen() ?
+        document.mozCancleFullScreen() :
+        document.webkitCancelFullScreen()
+    }
+  }
+
   const seekTimeUpdate = (e) => {
     const { duration, currentTime } = e.srcElement;
     const percent = (currentTime / duration ) * 100;
@@ -214,6 +235,7 @@ export const player = () => {
   eventHandler(nextBtn, 'click', debounce(() => handleNextVideo(), timeout));
   eventHandler(muteBtn, 'click', debounce(() => handleMuteVideo(), timeout));
   eventHandler(slider, 'change', debounce(() => handleVolumeSlider(),timeout));
+  eventHandler(fullScreenBtn, 'click', debounce(() => handleFullScreen(), timeout));
 
   eventHandler(progressBar, 'click', updateProgressBar);
   eventHandler(progressBar, 'mousemove', debounce((e) => mousedown && updateProgressBar(e), timeout));
