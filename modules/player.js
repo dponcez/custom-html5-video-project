@@ -136,7 +136,7 @@ export const player = () => {
       loadCurrentVideo(playlist, current_index);
       playVideo();
     } catch (error) {
-      log(`Failure to load the previous song: ${error.message}`)
+      log(`Error loading previous song: ${error.message}`)
     }
   }
 
@@ -157,12 +157,13 @@ export const player = () => {
       loadCurrentVideo(playlist, current_index);
       playVideo();
     } catch (error) {
-      log(`Failure to load the next song: ${error.message}`)
+      log(`Error loading next song: ${error.message}`)
     }
   }
 
   const handleMuteVideo = () => {
     const MUTED = video.muted ? video.muted = false : video.muted = true;
+
     if(!MUTED && !isMute){
       isMute = true;
       muteBtn.innerHTML = fa_volume_high;
@@ -191,17 +192,21 @@ export const player = () => {
     })
   })
 
-  const handleFullScreen = () => {
-    if(!document.mozFullScreen || !document.webkitFullScreen){
-      video.requestFullScreen() ?
-        video.mozRequestFullScreen() :
-        video.webkitRequestFullScreen(Element.ALLOW_KEYBOAR_INPUT)
-    }else{
-      document.cancelFullScreen() ?
-        document.mozCancleFullScreen() :
-        document.webkitCancelFullScreen()
-    }
+  const loadRequestFullScreen = () => {
+    eventHandler(fullScreenBtn, 'click', () => {
+      if(!document.mozFullScreen || !document.webkitFullScreen){
+        video.mozRequestFullScreen ?
+          video.mozRequestFullScreen() :
+          video.webkitRequestFullScreen(Element.ALLOW_KEYBOAR_INPUT)
+      }else{
+        document.mozCancelFullScreen ?
+          document.mozCancleFullScreen() :
+          document.webkitCancelFullScreen()
+      }
+    })
   }
+
+  const fullScreenError = (event) => log(`An error occured changing into fullscreen: ${event}`)
 
   const seekTimeUpdate = (e) => {
     const { duration, currentTime } = e.srcElement;
@@ -229,13 +234,14 @@ export const player = () => {
   eventHandler(video, 'timeupdate', seekTimeUpdate);
   eventHandler(video, 'loadedmetadata', seekTimeUpdate);
   eventHandler(video, 'ended', debounce(() => handleNextVideo(), timeout));
+  eventHandler(video, 'loadeddata', loadRequestFullScreen);
+  eventHandler(video, 'fullscreenerror', fullScreenError)
 
   eventHandler(playBtn, 'click', debounce(() => handlePlayVideo(), timeout));
   eventHandler(prevBtn, 'click', debounce(() => handlePrevVideo(), timeout));
   eventHandler(nextBtn, 'click', debounce(() => handleNextVideo(), timeout));
   eventHandler(muteBtn, 'click', debounce(() => handleMuteVideo(), timeout));
   eventHandler(slider, 'change', debounce(() => handleVolumeSlider(),timeout));
-  eventHandler(fullScreenBtn, 'click', debounce(() => handleFullScreen(), timeout));
 
   eventHandler(progressBar, 'click', updateProgressBar);
   eventHandler(progressBar, 'mousemove', debounce((e) => mousedown && updateProgressBar(e), timeout));
