@@ -1,24 +1,21 @@
 {
   "playlist": [
     {
-      "name": "blxst ft. tyga & ty dolla $ign",
+      "artist": "blxst ft. tyga & ty dolla $ign",
       "song": "chosen",
       "title": "chosen",
-      "poster": "./assets/images/poster.jpg",
       "album": "no love lost"
     },
     {
-      "name": "chris brown",
+      "artist": "chris brown",
       "song": "treading-water",
       "title": "treading water",
-      "poster": "./assets/images/poster2.jpg",
       "album": "fortune"
     },
     {
-      "name": "BTS",
+      "artist": "BTS",
       "song": "butter",
       "title": "butter",
-      "poster": "./assets/images/poster1.jpg",
       "album": "single"
     }
   ]
